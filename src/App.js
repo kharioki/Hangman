@@ -9,7 +9,24 @@ import Notification from './components/Notification';
 
 import { showNotification as show } from './helpers/helpers';
 
-const words = ['application', 'programming', 'interface', 'wizard'];
+const words = [
+  'spiderman',
+  'thanos',
+  'ironman',
+  'captainamerica',
+  'blackwidow',
+  'wolverine',
+  'hawkeye',
+  'antman',
+  'starlord',
+  'panther',
+  'gamora',
+  'magneto',
+  'nickfury',
+  'nebula',
+  'avengers',
+  'vision'
+];
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
 function App() {
@@ -47,6 +64,17 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeydown);
   }, [playable, correctLetters, wrongLetters]);
 
+  function playAgain() {
+    setPlayable(true);
+
+    // empty the arrays
+    setCorrectLetters([]);
+    setWrongLetters([]);
+
+    const random = [Math.floor(Math.random() * words.length)];
+    selectedWord = words[random];
+  }
+
   return (
     <>
       <Header />
@@ -60,6 +88,7 @@ function App() {
         wrongLetters={wrongLetters}
         selectedWord={selectedWord}
         setPlayable={setPlayable}
+        playAgain={playAgain}
       />
       <Notification showNotification={showNotification} />
     </>
